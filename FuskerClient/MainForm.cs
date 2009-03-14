@@ -839,7 +839,9 @@ namespace FuskerClient
                 {
                     dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Settings (Name VARCHAR PRIMARY KEY, Value VARCHAR)";
                     dbcmd.ExecuteNonQuery();
-                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Fuskers (ID INTEGER PRIMARY KEY AUTOINCREMENT, BASE VARCHAR, URL VARCHAR, NEW INTEGER)";
+                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Fuskers (ID INTEGER PRIMARY KEY AUTOINCREMENT, BASE VARCHAR, URL VARCHAR, NEW INTEGER, DATE DATETIME)";
+                    dbcmd.ExecuteNonQuery();
+                    dbcmd.CommandText = "CREATE TRIGGER IF NOT EXISTS \"date\" AFTER INSERT ON Fuskers BEGIN UPDATE Fuskers SET DATE=datetime('now') WHERE ID=new.ID; END;";
                     dbcmd.ExecuteNonQuery();
                     mytransaction.Commit();
                 }
