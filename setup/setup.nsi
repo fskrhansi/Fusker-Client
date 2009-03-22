@@ -119,6 +119,7 @@ SectionEnd
 Section /o -un.Main UNSEC0000
     Delete /REBOOTOK $INSTDIR\FuskerClient.exe
     DeleteRegValue HKCU "${REGKEY}\Components" Main
+    DeleteRegKey HKCU "SOFTWARE\Domweg"
 SectionEnd
 
 Section -un.post UNSEC0002

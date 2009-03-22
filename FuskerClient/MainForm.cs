@@ -115,7 +115,7 @@ namespace FuskerClient
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             this.FullName = executingAssembly.FullName.Split(new char[] { ',' })[0];
             this.Version = executingAssembly.FullName.Split(new char[] { ',' })[1].Split(new char[] { '=' })[1];
-            this.ApplicationData = Application.StartupPath + @"\Pictures";
+            this.ApplicationData = Application.StartupPath + System.IO.Path.DirectorySeparatorChar + @"Pictures";
             Directory.CreateDirectory(this.ApplicationData);
         }
 
@@ -578,38 +578,38 @@ namespace FuskerClient
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(119, 6);
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             this.pauseToolStripMenuItem.Click += new System.EventHandler(this.pauseToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(119, 6);
             // 
             // stopToolStripMenuItem
             // 
             this.stopToolStripMenuItem.Name = "stopToolStripMenuItem";
-            this.stopToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.stopToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.stopToolStripMenuItem.Text = "Stop";
             this.stopToolStripMenuItem.Click += new System.EventHandler(this.stopToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(119, 6);
             // 
             // databaseToolStripMenuItem
             // 
@@ -617,20 +617,20 @@ namespace FuskerClient
             this.vacuumToolStripMenuItem,
             this.clearToolStripMenuItem});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.databaseToolStripMenuItem.Text = "Database";
             // 
             // vacuumToolStripMenuItem
             // 
             this.vacuumToolStripMenuItem.Name = "vacuumToolStripMenuItem";
-            this.vacuumToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.vacuumToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.vacuumToolStripMenuItem.Text = "Vacuum";
             this.vacuumToolStripMenuItem.Click += new System.EventHandler(this.vacuumToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -640,32 +640,32 @@ namespace FuskerClient
             this.cacheShowToolStripMenuItem,
             this.emptyToolStripMenuItem});
             this.cacheToolStripMenuItem1.Name = "cacheToolStripMenuItem1";
-            this.cacheToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cacheToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.cacheToolStripMenuItem1.Text = "Cache";
             // 
             // cacheShowToolStripMenuItem
             // 
             this.cacheShowToolStripMenuItem.Name = "cacheShowToolStripMenuItem";
-            this.cacheShowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cacheShowToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.cacheShowToolStripMenuItem.Text = "Show";
             this.cacheShowToolStripMenuItem.Click += new System.EventHandler(this.cacheShowToolStripMenuItem_Click);
             // 
             // emptyToolStripMenuItem
             // 
             this.emptyToolStripMenuItem.Name = "emptyToolStripMenuItem";
-            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.emptyToolStripMenuItem.Text = "Empty";
             this.emptyToolStripMenuItem.Click += new System.EventHandler(this.emptyToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -827,7 +827,7 @@ namespace FuskerClient
         {
 
             // Create a connection and a command
-            dbcon = new SQLiteConnection("Data Source=" + Application.StartupPath + @"\config.db3");
+            dbcon = new SQLiteConnection("Data Source=" + Application.StartupPath + System.IO.Path.DirectorySeparatorChar + @"config.db3");
             using (SQLiteCommand dbcmd = dbcon.CreateCommand())
             {
 
