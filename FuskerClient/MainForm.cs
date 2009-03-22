@@ -33,7 +33,7 @@ namespace FuskerClient
     {
         private ToolStripMenuItem aboutToolStripMenuItem;
         private string ApplicationData;
-        private System.Drawing.Color backColor;
+        private System.Drawing.Color backColorSv;
         private bool blnBackupZoom = false;
         private bool blnNextFusker = false;
         private bool blnNextLid = false;
@@ -43,7 +43,7 @@ namespace FuskerClient
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private System.Drawing.Color foreColor;
+        private System.Drawing.Color foreColorSv;
         public string FullName = "Unknown";
         private bool screensaver = true;
         private ToolStripMenuItem fullScreenToolStripMenuItem;
@@ -59,7 +59,7 @@ namespace FuskerClient
         private NotifyIcon notifyIcon1;
         private Panel panel1;
         private ToolStripMenuItem pauseToolStripMenuItem;
-        private PictureBox pictureBox1;
+        private PictureBox mainPicture;
         public string ProxyDomain = "";
         public string ProxyPassword = "";
         public string ProxyServer = "";
@@ -174,11 +174,11 @@ namespace FuskerClient
 
         private void DoRun()
         {
-            this.backColor = this.BackColor;
-            this.foreColor = this.ForeColor;
+            this.backColorSv = this.BackColor;
+            this.foreColorSv = this.ForeColor;
             this.BackColor = System.Drawing.Color.Black;
             this.ForeColor = System.Drawing.Color.White;
-            this.pictureBox1.Visible = true;
+            this.mainPicture.Visible = true;
             this.thread = new Thread(new ThreadStart(this.RunIt));
             this.thread.Name = "RunIt";
             this.thread.Start();
@@ -192,17 +192,17 @@ namespace FuskerClient
                 this.thread.Abort();
             }
             base.WindowState = FormWindowState.Normal;
-            this.BackColor = this.backColor;
-            this.ForeColor = this.foreColor;
-            this.pictureBox1.Visible = false;
+            this.BackColor = this.backColorSv;
+            this.ForeColor = this.foreColorSv;
+            this.mainPicture.Visible = false;
             this.ShowStatus("stopped");
         }
 
         private void DrawPicture()
         {
-            if (this.pictureBox1.InvokeRequired)
+            if (this.mainPicture.InvokeRequired)
             {
-                this.pictureBox1.Invoke(new DrawPictureDelegate(this.DrawPicture));
+                this.mainPicture.Invoke(new DrawPictureDelegate(this.DrawPicture));
             }
             else
             {
@@ -236,11 +236,11 @@ namespace FuskerClient
                     num4 = Math.Max(1, num4);
                     num = Math.Max(0, (width - num3) / 2);
                     num2 = Math.Max(0, (height - num4) / 2);
-                    this.pictureBox1.Image = new Bitmap(this.image, num3, num4);
-                    this.pictureBox1.Width = num3;
-                    this.pictureBox1.Height = num4;
-                    this.pictureBox1.Left = num;
-                    this.pictureBox1.Top = num2;
+                    this.mainPicture.Image = new Bitmap(this.image, num3, num4);
+                    this.mainPicture.Width = num3;
+                    this.mainPicture.Height = num4;
+                    this.mainPicture.Left = num;
+                    this.mainPicture.Top = num2;
                 }
                 catch (Exception exception)
                 {
@@ -507,10 +507,10 @@ namespace FuskerClient
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.mainPicture = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // notifyIcon1
@@ -781,7 +781,7 @@ namespace FuskerClient
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.mainPicture);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
@@ -789,14 +789,14 @@ namespace FuskerClient
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // pictureBox1
+            // mainPicture
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(80, 48);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            this.mainPicture.Location = new System.Drawing.Point(80, 48);
+            this.mainPicture.Name = "pictureBox1";
+            this.mainPicture.Size = new System.Drawing.Size(100, 50);
+            this.mainPicture.TabIndex = 0;
+            this.mainPicture.TabStop = false;
+            this.mainPicture.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // MainForm
             // 
@@ -817,7 +817,7 @@ namespace FuskerClient
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mainPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -24,7 +24,7 @@
     <ManifestCertificateThumbprint>AEA8E343BAF43431F38DBF27C7008F31BB8724F1</ManifestCertificateThumbprint>
     <ManifestKeyFile>FuskerClient_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
