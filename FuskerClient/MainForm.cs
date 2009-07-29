@@ -1400,6 +1400,7 @@ namespace FuskerClient
                     Debug.WriteLine(ex.Message);
                 }
             }
+            Directory.CreateDirectory(this.ApplicationData);
 
         }
 
