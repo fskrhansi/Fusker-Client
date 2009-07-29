@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 [assembly: System.Runtime.CompilerServices.RuntimeCompatibility(WrapNonExceptionThrows=true)]
 [assembly: System.Reflection.AssemblyDelaySign(false)]
 [assembly: System.Reflection.AssemblyTrademark("")]
-[assembly: System.Reflection.AssemblyCopyright("FuskerClient.COM")]
+[assembly: System.Reflection.AssemblyCopyright("fuskerclient.berlios.de")]
 [assembly: System.Reflection.AssemblyProduct("")]
 [assembly: System.Reflection.AssemblyKeyName("")]
 [assembly: System.Reflection.AssemblyConfiguration("")]
