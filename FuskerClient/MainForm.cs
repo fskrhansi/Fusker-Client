@@ -853,13 +853,13 @@ namespace FuskerClient
                 // Create a table in the database
                 using (SQLiteTransaction mytransaction = dbcon.BeginTransaction())
                 {
-                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Settings (Name VARCHAR PRIMARY KEY, Value VARCHAR)";
+                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Settings (Name VARCHAR PRIMARY KEY NOT NULL, Value VARCHAR)";
                     dbcmd.ExecuteNonQuery();
                     dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Fuskers (ID INTEGER PRIMARY KEY AUTOINCREMENT, BASE VARCHAR, URL VARCHAR, NEW INTEGER, DATE DATETIME)";
                     dbcmd.ExecuteNonQuery();
                     dbcmd.CommandText = "CREATE TRIGGER IF NOT EXISTS \"date\" AFTER INSERT ON Fuskers BEGIN UPDATE Fuskers SET DATE=datetime('now') WHERE ID=new.ID; END;";
                     dbcmd.ExecuteNonQuery();
-                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Sites (BASE VARCHAR PRIMARY KEY, URL VARCHAR, LINKS VARCHAR, RATING INTEGER DEFAULT 0 NOT NULL)";
+                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Sites (BASE VARCHAR PRIMARY KEY NOT NULL, URL VARCHAR, LINKS VARCHAR, RATING INTEGER DEFAULT 0 NOT NULL)";
                     dbcmd.ExecuteNonQuery();
                     mytransaction.Commit();
                 }
