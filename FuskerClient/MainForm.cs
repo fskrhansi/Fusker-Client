@@ -1027,7 +1027,7 @@ namespace FuskerClient
 
         private void menuItem25_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.fuskerclient.com/update/Default.aspx?" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            Process.Start("http://fuskerclient.berlios.de/update/Default.php?" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
         }
 
         private void menuItem26_Click(object sender, EventArgs e)
@@ -1108,7 +1108,7 @@ namespace FuskerClient
         private void RunIt()
         {
             int index = 0;
-            Stream stream = this.Url("http://www.fuskerclient.com/v20/conf.aspx?version=" + this.Version);
+            Stream stream = this.Url("http://fuskerclient.berlios.de/update/conf.php?version=" + this.Version);
             if (stream != null)
             {
                 StreamReader reader = new StreamReader(stream);
@@ -1275,7 +1275,7 @@ namespace FuskerClient
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("http://www.fuskerclient.com/update/Default.aspx?" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+            Process.Start("http://fuskerclient.berlios.de/update/Default.php?" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
         }
 
         private void UpdateWindowBorder()
