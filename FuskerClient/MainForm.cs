@@ -246,7 +246,7 @@ namespace FuskerClient
                 {
                     Debug.WriteLine("DrawPicture: " + exception.Message);
                 }
-                GC.Collect();
+                //GC.Collect();
             }
         }
 
@@ -259,7 +259,23 @@ namespace FuskerClient
         {
             this.ShowFullScreen();
         }
-
+		private void storeURL(string strUrl, string strBase, string strLinks)
+		{
+			// Insert into the database
+            using (SQLiteTransaction mytransaction = dbcon.BeginTransaction())
+            {
+                using (SQLiteCommand dbcmd = dbcon.CreateCommand())
+                {
+                    // Create a parameterized insert command
+                    dbcmd.CommandText = "INSERT OR REPLACE INTO Sites (BASE,URL,LINKS) VALUES(@base,@url,@links)";
+                    dbcmd.Parameters.AddWithValue("base", strBase);
+                    dbcmd.Parameters.AddWithValue("url", strUrl);
+                    dbcmd.Parameters.AddWithValue("links", strLinks);
+                    dbcmd.ExecuteNonQuery();
+                    mytransaction.Commit();
+                }
+            }
+		}
         private void Fusker2Lids(string strUrl, string strBase, string strLinks)
         {
             int num = 0;
@@ -843,6 +859,8 @@ namespace FuskerClient
                     dbcmd.ExecuteNonQuery();
                     dbcmd.CommandText = "CREATE TRIGGER IF NOT EXISTS \"date\" AFTER INSERT ON Fuskers BEGIN UPDATE Fuskers SET DATE=datetime('now') WHERE ID=new.ID; END;";
                     dbcmd.ExecuteNonQuery();
+                    dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS Sites (BASE VARCHAR PRIMARY KEY, URL VARCHAR, LINKS VARCHAR)";
+                    dbcmd.ExecuteNonQuery();
                     mytransaction.Commit();
                 }
             }
@@ -1117,8 +1135,6 @@ namespace FuskerClient
                 XmlDocument document = new XmlDocument();
                 document.LoadXml(xml);
                 XmlNodeList list = document.SelectNodes("//fusker");
-                while (true)
-                {
                     for (index = 0; index < list.Count; index++)
                     {
                         XmlNode node = list.Item(index);
@@ -1136,11 +1152,22 @@ namespace FuskerClient
                                 str2 = strUrl;
                             }
                             string strLinks = node.SelectSingleNode("@links").Value;
-                            this.Fusker2Lids(strUrl, str2, strLinks);
+                            this.storeURL(strUrl, str2, strLinks);
                         }
                     }
-                }
             }
+            while(true){
+            	using (SQLiteCommand dbcmd = dbcon.CreateCommand())
+	            {
+	                dbcmd.CommandText = "SELECT URL, BASE, LINKS FROM Sites";
+	                using (DbDataReader reader = dbcmd.ExecuteReader())
+	                {
+	                	while(reader.Read()){
+	                		this.Fusker2Lids(reader.GetString(0), reader.GetString(1), reader.GetString(2));
+	                	}
+	                }
+	            }
+	        }
         }
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
